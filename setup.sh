@@ -1,4 +1,4 @@
-#!/usr/bin/env zsh
+#!/usr/bin/env bash
 
 function _ensure_brew_installed() {
   # Check if brew is already installed, and if so
@@ -69,18 +69,25 @@ function _create_symlink() {
 }
 
 function main() {
-  echo "------"
-  # nvim
-  echo ">> Installing & setting up neovim"
-  _ensure_installed "nvim"
-  _create_symlink ".config/nvim/init.vim"
-  # vim-plug
-  echo ">> Installing vim-plug [always reinstall]"
-    sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
-         https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
-  echo ">> Installing neovim plugins (:PlugInstall)"
-  nvim -c 'PlugInstall' -c 'qa'
-  echo "------"
+  # tooling
+  echo ">> Installing toolsets / cli"
+  _ensure_installed "ripgrep curl zsh neovim jq yq tmux tree-sitter"
+  
+  # desktop apps
+  echo ">> Installing desktop apps"
+  _ensure_installed "spotify firefox iterm2 visual-studio-code"
+
+  # setup neovim
+  echo ">> Setting up neovim"
+  git clone --depth 1 https://github.com/AstroNvim/AstroNvim ~/.config/nvim
+  git clone https://github.com/cpluss/astronvim.git ~/.config/nvim/lua/user
+  nvim -c 'Lazy check' -c 'Lazy update' -c 'qa'
+
+  echo ">> Setting up zsh"
+  sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+  git clone https://github.com/romkatv/powerlevel10k.git $HOME/.oh-my-zsh/custom/themes/powerlevel10k
+  _create_symlink ".zshrc"
+  _create_symlink ".p10k.zsh"
 }
 
 main "$@"

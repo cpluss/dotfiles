@@ -29,6 +29,9 @@ Plug 'morhetz/gruvbox'
 " In order to interact and get erlang syntax highlighting
 Plug 'vim-erlang/vim-erlang-runtime'
 
+" In order to get terraform syntax highlighting
+Plug 'hashivim/vim-terraform'
+
 call plug#end()
 
 " Enable ALE as a linter in the powerbar
@@ -51,6 +54,9 @@ nnoremap <C-f> :Rg<CR>
 " Ctrl+S+G to copy the git remote link
 nnoremap <C-S-g> :GetCurrentBranchLink<CR>
 vnoremap <C-S-g> :GetCurrentBranchLink<CR>
+
+" Allows searching across multiple git repositories
+let g:ctrlp_working_path_mode = ''
 
 " Use rip-grep (faster than grep) for ctrl+p
 if executable('rg')
@@ -88,6 +94,9 @@ syntax on
 filetype plugin indent on
 colorscheme gruvbox
 
+" Force yaml.template files to match against yaml files
+au BufRead,BufNewFile *.yaml.template set filetype=yaml
+
 " Remap keys to make it easier to do tab navigation
 nnoremap <S-h> :tabprevious<CR>
 nnoremap <S-l> :tabnext<CR>
@@ -99,6 +108,3 @@ set encoding=utf-8
 
 " Enable the mouse
 set mouse=a
-
-" let g:ale_erlang_erlfmt_executable = '/Users/sebastianlund/pkg/erlfmt/_build/release/bin/erlfmt'
-" let g:ale_fixers = {'erlang': ['erlfmt']}
