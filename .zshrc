@@ -118,5 +118,7 @@ if type brew &>/dev/null; then
   compinit
 fi
 
+eval $(keychain --eval --agents ssh id_ed25519)
+
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
