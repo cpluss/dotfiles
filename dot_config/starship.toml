@@ -1,0 +1,75 @@
+# Minimal, no fluff, single-line
+add_newline = false
+
+# Prompt line format
+format = """
+$directory$git_branch$git_status$nodejs$python$rust$golang$docker_context$cmd_duration$line_break$character
+"""
+
+[character]
+success_symbol = "[›](green)"
+error_symbol = "[›](bold red)"
+vicmd_symbol = "[‹](blue)"
+
+[directory]
+style = "blue"
+truncate_to_repo = false
+truncation_length = 0
+truncation_symbol = ""
+home_symbol = "~"
+read_only = " (ro)"
+read_only_style = "red"
+
+
+[git_branch]
+symbol = " "
+style = "cyan"
+format = " [$symbol$branch]($style)"
+
+[git_status]
+format = ' [$all_status]($style)'
+style = "red"
+conflicted = "conflicted "
+ahead = "↑${count} "
+behind = "↓${count} "
+diverged = "⇕↑${ahead_count}↓${behind_count} "
+untracked = "? "
+stashed = "s "
+modified = "! "
+staged = "+ "
+renamed = "» "
+deleted = "x "
+
+[nodejs]
+symbol = ""
+format = " [node:$version](green)"
+detect_files = ["package.json", ".nvmrc", ".node-version"]
+
+[python]
+symbol = ""
+format = " [py:$version]($style)"
+style = "yellow"
+
+[rust]
+symbol = ""
+format = " [rs:$version]($style)"
+style = "yellow"
+
+[golang]
+symbol = ""
+format = " [go:$version]($style)"
+style = "yellow"
+
+[docker_context]
+symbol = ""
+format = " [docker:$context](blue bold)"
+only_with_files = true
+
+[cmd_duration]
+min_time = 500
+format = " [$duration](red)"
+
+[package]
+format = "  "
+disabled = false
+
