@@ -13,8 +13,8 @@ starship init fish | source
 
 alias gst="git status"
 alias gl="git pull --rebase"
-alias gc="git commit"
-alias gca="git commit -a"
+alias gc="git commit -v"
+alias gca="git commit -a -v"
 alias gp="git push"
 
 # === Environment Variables ===
@@ -29,8 +29,8 @@ set -gx BUN_INSTALL "$HOME/.bun"
 
 set -gx AWS_REGION "us-east-2"
 set -gx AWS_DEFAULT_REGION "us-east-2"
-set -gx DISABLE_PROMPT_CACHING 1
-set -gx CLAUDE_CODE_USE_BEDROCK 1
+# set -gx DISABLE_PROMPT_CACHING 1
+# set -gx CLAUDE_CODE_USE_BEDROCK 1
 
 # === Init Tools ===
 # pyenv
@@ -58,4 +58,9 @@ end
 # Google Cloud SDK (zsh -> fish)
 test -f ~/Downloads/google-cloud-sdk/path.fish.inc; and source ~/Downloads/google-cloud-sdk/path.fish.inc
 test -f ~/Downloads/google-cloud-sdk/completion.fish.inc; and source ~/Downloads/google-cloud-sdk/completion.fish.inc
+
+
+# Added by LM Studio CLI (lms)
+set -gx PATH $PATH /Users/selund/.lmstudio/bin
+# End of LM Studio CLI section
 
